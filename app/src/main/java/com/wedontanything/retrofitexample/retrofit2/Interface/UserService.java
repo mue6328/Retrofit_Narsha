@@ -1,0 +1,92 @@
+package com.wedontanything.retrofitexample.retrofit2.Interface;
+
+import com.wedontanything.retrofitexample.Model.User.User.UpdateEmail;
+import com.wedontanything.retrofitexample.Model.User.User.UpdatePassword;
+import com.wedontanything.retrofitexample.Model.User.User.UpdatePhoneNumber;
+import com.wedontanything.retrofitexample.Model.User.User.UpdateSchoolName;
+import com.wedontanything.retrofitexample.Model.User.User.User;
+import com.wedontanything.retrofitexample.Request.UserRequest;
+import com.wedontanything.retrofitexample.Response.Response;
+
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.HTTP;
+import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
+
+public interface UserService {
+//    @GET("/api")
+//    void test(String sort, Callback<String> callback);
+    @FormUrlEncoded
+    @POST("/api/user/")
+    Call<User> postSignup(
+        @Field("id") String id,
+        @Field("name") String name,
+        @Field("password") String password,
+        @Field("email") String email,
+        @Field("phoneNumber") String phoneNumber,
+        @Field("schoolName") String schoolName
+    );
+
+    @FormUrlEncoded
+    @POST("/api/user/findId")
+    Call<User> postFindId(
+        @Field("name") String name
+    );
+
+    @FormUrlEncoded
+    @POST("/api/user/findPassword")
+    Call<User> postFindPassword (
+        @Field("id") String id,
+        @Field("updatePassword") String updatePassword
+    );
+
+//    @PUT("/api/register/updatePassword")
+//    Call<UpdatePassword> putUpdatePassword (
+//        @Query("id") String id,
+//        @Query("password") String password,
+//        @Query("updatePassword") String updatePassword
+//    );
+
+    @FormUrlEncoded
+    @PATCH("/api/user/updateEmail")
+    Call<UpdateEmail> putUpdateEmail (
+        @Field("id") String id,
+        @Field("email") String email,
+        @Field("updateEmail") String updateEmail
+    );
+
+    @FormUrlEncoded
+    @PATCH("/api/user/updatePhoneNumber")
+    Call<UpdatePhoneNumber> putUpdatePhoneNumber (
+        @Field("id") String id,
+        @Field("phoneNumber") String phoneNumber,
+        @Field("updatePhoneNumber") String updatePhoneNumber
+    );
+
+    @FormUrlEncoded
+    @PATCH("/api/user/updateSchool")
+    Call<UpdateSchoolName> putUpdateSchool (
+        @Field("id") String member_id,
+        @Field("updateSchoolName") String updateSchoolName
+    );
+
+//    @DELETE("api/user/deleteUser")
+//    Call<User> deleteMember (
+//        @HTTP(method = DELETE, path = "")
+//    );
+
+    @FormUrlEncoded
+    @POST("/api/user/login")
+    Call<User> postLogin(
+        @Field("id") String id,
+        @Field("password") String password
+    );
+}
