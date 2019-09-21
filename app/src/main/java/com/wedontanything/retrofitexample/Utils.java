@@ -7,10 +7,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public final class Utils {
 
+    public static final String HOST_URL = "http://10.80.163.141:3065";
+
     public static Retrofit RETROFIT =
             new Retrofit.Builder()
                     .client(getClient())
-                    .baseUrl("http://192.168.43.151:3065")
+                    .baseUrl(HOST_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 

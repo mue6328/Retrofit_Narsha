@@ -1,10 +1,8 @@
 package com.wedontanything.retrofitexample.retrofit2.Interface;
 
-import com.wedontanything.retrofitexample.Request.UserRequest;
 import com.wedontanything.retrofitexample.Response.Response;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -16,22 +14,32 @@ import retrofit2.http.Query;
 
 public interface ProductService {
 
+    @FormUrlEncoded
     @POST("/api/product")
     Call<Response> postProductApply (
-        @Header("token") String token
-        // 상품 정보
+        @Header("token") String token,
+        @Field("productName") String productName,
+        @Field("description") String description,
+        @Field("price") int price,
+        @Field("hashtag") String hashtag
     );
 
+    @FormUrlEncoded
     @PUT("/api/product/updateProduct/:id")
     Call<Response> putUpdateProduct (
-        @Header("token") String token
-        // 상품 정보
+        @Header("token") String token,
+        @Field("id") String id,
+        @Field("userId") String userId,
+        @Field("productName") String productName,
+        @Field("description") String description,
+        @Field("price") int price,
+        @Field("hashtag") String hashtag
     );
 
     @DELETE("/api/product/deleteProduct/:id")
     Call<Response> deleteProduct (
         @Header("token") String token,
-        @Field("product_id") Integer product_id
+        @Field("id") Integer id
     );
 
     @GET("/api/product/myProduct?member_id=")
@@ -41,22 +49,22 @@ public interface ProductService {
 
     @GET("/api/product/hashtag?hashtag=")
     Call<Response> getHashTag (
-        @Field("hashtag") String hashtag
+        @Query("hashtag") String hashtag
     );
 
     @GET("/api/product/searchProduct?product_name=")
     Call<Response> getSearchProduct (
-        @Field("product_name") String product_name
+        @Query("product_name") String product_name
     );
 
     @GET("/api/product/heartProduct?member_id=")
     Call<Response> getheartProduct (
-        @Field("member_id") String member_id
+        @Query("member_id") String member_id
     );
 
     @GET("/api/product/mypageProductDetails?id=")
     Call<Response> getProductInfo (
-        @Field("product_id") Integer product_id
+        @Query("id") Integer id
     );
 
 

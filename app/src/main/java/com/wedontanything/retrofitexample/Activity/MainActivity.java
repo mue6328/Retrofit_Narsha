@@ -1,23 +1,15 @@
 package com.wedontanything.retrofitexample.Activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
-import com.wedontanything.retrofitexample.Model.User.User.UpdateEmail;
 import com.wedontanything.retrofitexample.Model.User.User.UpdatePassword;
-import com.wedontanything.retrofitexample.Model.User.User.UpdatePhoneNumber;
-import com.wedontanything.retrofitexample.Model.User.User.UpdateSchoolName;
-import com.wedontanything.retrofitexample.Model.User.User.User;
 import com.wedontanything.retrofitexample.R;
-import com.wedontanything.retrofitexample.Request.UserRequest;
 import com.wedontanything.retrofitexample.Utils;
 import com.wedontanything.retrofitexample.retrofit2.Interface.UserService;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,16 +53,34 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    };
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Button loginbutton = findViewById(R.id.loginButton);
+
+        Button signupbutton = findViewById(R.id.signupButton);
+
         UserService service = Utils.RETROFIT.create(UserService.class);
 
         UpdatePassword updatePassword = new UpdatePassword();
+
+        loginbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        signupbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        Call<User> signup = service.postSignup("abcd5432", "김현재", "Aa@12345", "dgsw@dgsw.hs.kr"
 //                                                , "01055554444", "대구소프트웨어고등학교");
@@ -195,18 +205,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-        Call<User> postLogin = service.postLogin("abcd5432", "Aa@12345");
 
-        postLogin.enqueue(new Callback<User>() {
-            @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                Log.d("성공", "onResponse: " + response.message());
-            }
-
-            @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.d("실패", "onFailure: " + t.toString());
-            }
-        });
     }
 }
