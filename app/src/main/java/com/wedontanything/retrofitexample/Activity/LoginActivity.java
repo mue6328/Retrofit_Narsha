@@ -10,20 +10,21 @@ import android.widget.EditText;
 
 import com.wedontanything.retrofitexample.Model.User.User.User;
 import com.wedontanything.retrofitexample.R;
+import com.wedontanything.retrofitexample.Response.Response;
 import com.wedontanything.retrofitexample.Utils;
 import com.wedontanything.retrofitexample.retrofit2.Interface.UserService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    Button loginButton;
-    Button signupButton;
+    private Button loginButton;
+    private Button signupButton;
+    private Button passwordFindButton;
 
-    EditText id;
-    EditText pw;
+    private EditText id;
+    private EditText pw;
 
     UserService service = Utils.RETROFIT.create(UserService.class);
 
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         loginButton = findViewById(R.id.loginButtonLogin);
         signupButton = findViewById(R.id.loginButtonSignUp);
+        passwordFindButton = findViewById(R.id.passwordFind);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +51,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        passwordFindButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, PasswordFindActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void login() {
@@ -56,25 +66,27 @@ public class LoginActivity extends AppCompatActivity {
         id = findViewById(R.id.loginEditId);
         pw = findViewById(R.id.loginEditPassword);
 
-        Call<User> postLogin = service.postLogin(id.getText().toString(),
+        Call<retrofit2.Response<Response<User>>> postLogin = service.postLogin(id.getText().toString(),
                 pw.getText().toString());
 
-        postLogin.enqueue(new Callback<User>() {
+        postLogin.enqueue(new Callback<retrofit2.Response<Response<User>>>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                User user = response.body();
+            public void onResponse(Call<retrofit2.Response<Response<User>>> call, retrofit2.Response<retrofit2.Response<Response<User>>> response) {
+                //User user = response.body();
 
                 Log.d("성공", "onResponse: " + response.message());
-                if (user != null)
-                {
-                    Log.d("null", "onResponse: null ");
-                }
+//                if (user != null)
+//                {
+//                    Log.d("null", "onResponse: null ");
+//                }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
+            public void onFailure(Call<retrofit2.Response<Response<User>>> call, Throwable t) {
                 Log.d("실패", "onFailure: " + t.toString());
             }
         });
+
+
     }
 }

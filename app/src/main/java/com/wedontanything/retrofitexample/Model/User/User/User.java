@@ -3,8 +3,6 @@ package com.wedontanything.retrofitexample.Model.User.User;
 public class User {
     private String id;
 
-    private String member_id;
-
     private String name;
 
     private String password;
@@ -15,20 +13,16 @@ public class User {
 
     private String school_name;
 
+    private String permission;
+
+    private String token;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getMember_id() {
-        return member_id;
-    }
-
-    public void setMember_id(String member_id) {
-        this.member_id = member_id;
     }
 
     public String getName() {
@@ -69,5 +63,21 @@ public class User {
 
     public void setSchool_name(String school_name) {
         this.school_name = school_name;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
     }
 }

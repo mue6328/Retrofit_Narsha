@@ -1,25 +1,16 @@
 package com.wedontanything.retrofitexample.retrofit2.Interface;
 
 import com.wedontanything.retrofitexample.Model.User.User.UpdateEmail;
-import com.wedontanything.retrofitexample.Model.User.User.UpdatePassword;
 import com.wedontanything.retrofitexample.Model.User.User.UpdatePhoneNumber;
 import com.wedontanything.retrofitexample.Model.User.User.UpdateSchoolName;
 import com.wedontanything.retrofitexample.Model.User.User.User;
-import com.wedontanything.retrofitexample.Request.UserRequest;
 import com.wedontanything.retrofitexample.Response.Response;
 
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.HTTP;
-import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Part;
-import retrofit2.http.Query;
 
 public interface UserService {
 //    @GET("/api")
@@ -43,7 +34,7 @@ public interface UserService {
 
     @FormUrlEncoded
     @POST("/api/user/findPassword")
-    Call<User> postFindPassword (
+    Call<Response> postFindPassword (
         @Field("id") String id,
         @Field("updatePassword") String updatePassword
     );
@@ -85,7 +76,7 @@ public interface UserService {
 
     @FormUrlEncoded
     @POST("/api/user/login")
-    Call<User> postLogin(
+    Call<retrofit2.Response<Response<User>>> postLogin(
         @Field("id") String id,
         @Field("password") String password
     );

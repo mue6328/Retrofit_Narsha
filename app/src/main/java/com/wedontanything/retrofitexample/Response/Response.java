@@ -2,12 +2,12 @@ package com.wedontanything.retrofitexample.Response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Response {
+public class Response<T> {
     @SerializedName(value = "status")
     private Integer status;
 
     @SerializedName(value = "data")
-    private String data;
+    private T data;
 
     private String message;
 
@@ -19,11 +19,11 @@ public class Response {
         this.status = status;
     }
 
-    public String getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(T data) {
         this.data = data;
     }
 
